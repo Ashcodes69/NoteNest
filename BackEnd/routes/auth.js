@@ -4,10 +4,11 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fetchUser = require("../middleware/fetchUser");
 
-const JWT_SECRET = "you are a rockstar";
+const JWT_SECRET = "you are a rockstar"; // i have to remove thsis
 
-//creating a user using post "?api/auth/createUser"--No login required
+// ROUTE-1creating a user using post "?api/auth/createUser"--No login required
 
 router.post(
   "/createUser",
@@ -61,7 +62,7 @@ router.post(
   }
 );
 
-//authenticating a user using post "?api/auth/login"--No login required
+// ROUTE-2 authenticating a user using post "?api/auth/login"--No login required
 
 router.post(
   "/login",
@@ -108,4 +109,16 @@ router.post(
   }
 );
 
+// ROUTE-3 get loggedin user's data using post "?api/auth/getuser"-- login required
+
+router.post("/getuser", fetchUser, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.send(user)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Enternal server Error");
+  }
+});
 module.exports = router;
