@@ -13,6 +13,8 @@ const JWT_SECRET = "you are a rockstar"; // i have to remove thsis
 router.post(
   "/createUser",
   [
+    // ensuring that user must enter a valid email and password using --- express-validator
+
     body("name", "Enter a valid name").isLength({ min: 3 }),
     body("email", "enter a vaiid email").isEmail(),
     body("password", "password is incorrect").isLength({ min: 7 }),
@@ -115,7 +117,7 @@ router.post("/getuser", fetchUser, async (req, res) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId).select("-password");
-    res.send(user)
+    res.send(user);
   } catch (error) {
     console.error(error);
     res.status(500).send("Enternal server Error");
