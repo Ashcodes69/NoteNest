@@ -1,25 +1,37 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
 import NoteItem from "./NoteItem";
 
 function Notes() {
   const context = useContext(NoteContext);
-  const { notes, getNotes, } = context;
-    const [note, setNote] = useState({ title: "", description: "", tag:"default" });
-    const onchange = (e) => {
-      setNote({ ...note, [e.target.name]: e.target.value });
-    };
-    const handleAddNote = (e) => {
-      e.preventDefault()
-      addNotes(note.title, note.description, note.tag)
-    };
+  const { notes, getNotes, editNote } = context;
+  const [note, setNote] = useState({
+    id: "",
+    etitle: "",
+    edescription: "",
+    etag: "default",
+  });
+  const onchange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
+  const handleUpdateNote = () => {
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+    refClose.current.click();
+  };
   useEffect(() => {
     getNotes();
     //eslint-disable-next-line
   }, []);
   const ref = useRef(null);
-  const updateNote = () => {
+  const refClose = useRef(null);
+  const updateNote = (currentNote) => {
     ref.current.click();
+    setNote({
+      id: currentNote._id,
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
+    });
   };
   return (
     <>
@@ -35,7 +47,7 @@ function Notes() {
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -43,7 +55,7 @@ function Notes() {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Added Note
+                Edit Note
               </h1>
               <button
                 type="button"
@@ -56,38 +68,41 @@ function Notes() {
               <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">
-                    Title
+                    Update Title
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="title"
-                    name="title"
+                    id="etitle"
+                    name="etitle"
                     aria-describedby="emailHelp"
+                    value={note.etitle}
                     onChange={onchange}
                   />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label">
-                    Description
+                    Update Description
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="description"
-                    name="description"
+                    id="edescription"
+                    name="edescription"
+                    value={note.edescription}
                     onChange={onchange}
                   />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label">
-                    Tag
+                    Update Tag
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="tag"
-                    name="tag"
+                    id="etag"
+                    name="etag"
+                    value={note.etag}
                     onChange={onchange}
                   />
                 </div>
@@ -95,13 +110,19 @@ function Notes() {
             </div>
             <div className="modal-footer">
               <button
+                ref={refClose}
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleUpdateNote}
+                disabled={note.etitle.length<3||note.edescription.length<8}
+              >
                 update note
               </button>
             </div>
@@ -110,6 +131,9 @@ function Notes() {
       </div>
       <div className="container row">
         <h2>Your notes</h2>
+        <div className="container">
+          {notes.length === 0 && "No notes to display"}
+        </div>
         {notes.map((note) => {
           return (
             <NoteItem key={note._id} updateNote={updateNote} note={note} />

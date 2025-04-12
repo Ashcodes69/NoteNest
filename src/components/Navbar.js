@@ -4,7 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 function Navbar() {
   let location = useLocation();
 
-
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -46,16 +45,13 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
+          <form className="d-flex">
+            <Link class="btn btn-primary ms-2" to="/logIn" role="button">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+            </Link>
+            <Link class="btn btn-primary ms-2" to="/signUp" role="button">
+              <i class="fa-solid fa-user-plus"></i> Signup
+            </Link>
           </form>
         </div>
       </div>
