@@ -18,7 +18,7 @@ function NoteItem(props) {
           <i
             className="fa-solid fa-trash-can mx-3"
             onClick={() => {
-              deleteNote(note._id);
+              deleteNote(note._id);         
             }}
           ></i>
           <i className="fa-solid fa-pen-to-square mx-3" onClick={()=>(updateNote(note))}></i>

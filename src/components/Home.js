@@ -3,11 +3,12 @@ import Notes from "./Notes";
 import AddNotes from "./AddNotes";
 
 
-function Home() {
+function Home(props) {
+const{showAlert}=props
   return (
     <div>
-      <AddNotes />
-      <Notes></Notes>
+      <AddNotes/>
+      <Notes showAlert={showAlert}></Notes>
     </div>
   );
 }

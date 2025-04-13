@@ -13,11 +13,12 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdmNWU1NTg5NjFhOTQ5YmRlNjYyODExIn0sImlhdCI6MTc0NDE2ODI4MH0.kmsITSBGX5Q58lshz2utEtVs1M3UO_oNO0tMhtAZC3g",
+          localStorage.getItem('token'),
       },
     });
     const json = await response.json();
     setNotes(json); // Make sure this is an array
+    props.showAlert("Featched all notes successfully","success")
   };
 
   // Add a note
@@ -27,12 +28,13 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdmNWU1NTg5NjFhOTQ5YmRlNjYyODExIn0sImlhdCI6MTc0NDE2ODI4MH0.kmsITSBGX5Q58lshz2utEtVs1M3UO_oNO0tMhtAZC3g",
+        localStorage.getItem('token'),
       },
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
     setNotes(notes.concat(json)); // Append the new note
+    props.showAlert("Note added successfully","success")
   };
 
   // Delete a note
@@ -42,12 +44,13 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdmNWU1NTg5NjFhOTQ5YmRlNjYyODExIn0sImlhdCI6MTc0NDE2ODI4MH0.kmsITSBGX5Q58lshz2utEtVs1M3UO_oNO0tMhtAZC3g",
+        localStorage.getItem('token'),
       },
     });
 
     const newNotes = notes.filter((note) => note._id !== id);
     setNotes(newNotes);
+    props.showAlert("Note deleted successfully","danger")
   };
 
   // Edit a note
@@ -57,7 +60,7 @@ const NoteState = (props) => {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdmNWU1NTg5NjFhOTQ5YmRlNjYyODExIn0sImlhdCI6MTc0NDE2ODI4MH0.kmsITSBGX5Q58lshz2utEtVs1M3UO_oNO0tMhtAZC3g",
+        localStorage.getItem('token'),
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -67,6 +70,7 @@ const NoteState = (props) => {
       note._id === id ? { ...note, title, description, tag } : note
     );
     setNotes(updatedNotes);
+    props.showAlert("Note updated successfully","success")
   };
 
   return (
