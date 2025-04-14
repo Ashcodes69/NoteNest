@@ -57,15 +57,14 @@ function Navbar() {
               </Link>
             </>
           ) : (
-            <button
+            <div
+              className="d-flex ms-auto user-profile"
               onClick={() => {
-                localStorage.removeItem("token");
-                navigate("/login"); // or navigate to login page
+                navigate("/userProfile");
               }}
-              className="btn btn-primary ms-2"
             >
-              <i className="fa-solid fa-right-from-bracket"></i> Logout
-            </button>
+              <i className="fa-duotone fa-solid fa-user"></i>
+            </div>
           )}
         </div>
       </div>
@@ -74,3 +73,13 @@ function Navbar() {
 }
 
 export default Navbar;
+
+// {
+//   /* //  onClick={()=>{navigate("/userProfile")}}
+//             // <button */
+// }
+ 
+// //   className="btn btn-primary ms-2"
+// // >
+// //   <
+// // </button>
