@@ -21,12 +21,13 @@ function App() {
       setAlert(null);
     }, 1500);
   };
+
   return (
     <NoteState showAlert={showAlert}>
       <Router>
         <Navbar />
         <Alert alert={alert}/>
-        <div className="container">
+        <div className="container" >
           <Routes>
             <Route exact path="/" element={<Home showAlert={showAlert}/>}></Route>
             <Route exact path="/about" element={<About />}></Route>

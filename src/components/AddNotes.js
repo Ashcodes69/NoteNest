@@ -44,6 +44,7 @@ function AddNotes() {
               name="description"
               onChange={onchange}
               value={note.description}
+              
             />
           </div>
           <div className="mb-3">
@@ -61,7 +62,7 @@ function AddNotes() {
           </div>
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-success"
             onClick={handleAddNote}
             disabled={note.title.length<3||note.description.length<8}
           >

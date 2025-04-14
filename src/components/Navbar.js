@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/" style={{color:"#FF0000"}}>
           NoteNest
         </Link>
         <button
@@ -27,21 +27,23 @@ function Navbar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
-                className={`nav-link ${
-                  location.pathname === "/" ? "active" : ""
-                }`}
+                className={`nav-link`}
                 aria-current="page"
                 to="/"
+                style={{
+                  color: location.pathname === "/" ? "#FF0000" : "#9B1C1C",
+                }}
               >
                 Home
               </Link>
             </li>
             <li className="nav-item">
               <Link
-                className={`nav-link ${
-                  location.pathname === "/about" ? "active" : ""
-                }`}
+                className={`nav-link bout`}
                 to="/about"
+                style={{
+                  color: location.pathname === "/about" ? "#FF0000" : "#9B1C1C",
+                }}
               >
                 About
               </Link>
@@ -73,13 +75,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-// {
-//   /* //  onClick={()=>{navigate("/userProfile")}}
-//             // <button */
-// }
- 
-// //   className="btn btn-primary ms-2"
-// // >
-// //   <
-// // </button>

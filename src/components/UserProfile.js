@@ -63,9 +63,10 @@ function UserProfile() {
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
+        style={{backgroundColor:"#000000"}}
       >
         <div className="modal-dialog">
-          <div className="modal-content">
+          <div className="modal-content"style={{backgroundColor:"#363946", color:"#B1B6A6"}}>
             <div className="modal-header">
               <h3>Your account</h3>
               <button
@@ -83,7 +84,7 @@ function UserProfile() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-danger"
                 data-bs-dismiss="modal"
                 onClick={() => {
                   localStorage.removeItem("token");

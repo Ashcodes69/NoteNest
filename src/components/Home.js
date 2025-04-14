@@ -6,7 +6,7 @@ import AddNotes from "./AddNotes";
 function Home(props) {
 const{showAlert}=props
   return (
-    <div>
+    <div style={{backgroundColor:"#000000"}}>
       <AddNotes/>
       <Notes showAlert={showAlert}></Notes>
     </div>

@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #000000;
+  color: #819595;
 }
 
 code {
@@ -13,7 +15,7 @@ code {
 }
 .user-profile{
   cursor: pointer;
-  background-color: white;
+  background-color: #FF0000;
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
@@ -21,4 +23,26 @@ code {
   justify-content: center;
   align-items: center;
   font-size: 1.3rem;
+}
+.form-control{
+  background-color: #363946;
+  color: #B1B6A6;
+}
+.form-control:focus {
+  background-color: #363946;
+  color: #B1B6A6;
+  outline: none;  /* Optional: remove the blue glow */
+}
+#title{
+  width:20rem;
+  height: 4rem;
+  font-size: 2rem;
+}
+#description{
+  font-size: 2rem;
+  height: 4rem; 
+}
+#tag{
+  width:20rem;
+  height: 3rem;
 }
